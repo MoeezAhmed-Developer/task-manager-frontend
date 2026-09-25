@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Simple task management dashboard" />
+    <title>Task Manager</title>
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.2.0/css/line.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <span class="brand-icon"><i class="uil uil-check-circle"></i></span>
+          <span>TaskFlow</span>
+        </div>
+
+        <nav>
+          <button class="nav-item active" data-filter-status="all">
+            <i class="uil uil-apps"></i> All Tasks
+          </button>
+          <button class="nav-item" data-filter-status="todo">
+            <i class="uil uil-circle"></i> To Do
+          </button>
+          <button class="nav-item" data-filter-status="in-progress">
+            <i class="uil uil-spinner-alt"></i> In Progress
+          </button>
+          <button class="nav-item" data-filter-status="completed">
+            <i class="uil uil-check"></i> Completed
+          </button>
+        </nav>
+
+        <button class="sidebar-add" id="openAddSidebar">
+          <i class="uil uil-plus"></i> Add New Task
+        </button>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <button
+            class="icon-btn mobile-menu"
+            id="menuToggle"
+            aria-label="Open menu"
+          >
+            <i class="uil uil-bars"></i>
+          </button>
+
+          <div>
+            <p class="eyebrow">TASK MANAGEMENT</p>
+            <h1>My Tasks</h1>
+          </div>
+
+          <button class="primary-btn" id="openAdd">
+            <i class="uil uil-plus"></i> Add Task
+          </button>
+        </header>
+
+        <section class="stats">
+          <article class="stat-card">
+            <span class="stat-icon"><i class="uil uil-apps"></i></span>
+            <div>
+              <small>Total Tasks</small><strong id="totalCount">0</strong>
+            </div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon"><i class="uil uil-circle"></i></span>
+            <div><small>To Do</small><strong id="todoCount">0</strong></div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon"><i class="uil uil-spinner-alt"></i></span>
+            <div>
+              <small>In Progress</small><strong id="progressCount">0</strong>
+            </div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon"><i class="uil uil-check"></i></span>
+            <div>
+              <small>Completed</small><strong id="completedCount">0</strong>
+            </div>
+          </article>
+        </section>
+
+        <section class="toolbar">
+          <div class="search">
+            <i class="uil uil-search"></i>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Search tasks..."
+              aria-label="Search tasks"
+            />
+          </div>
+
+          <select id="priorityFilter" aria-label="Filter by priority">
+            <option value="all">All Priorities</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </section>
+
+        <section class="task-list" id="taskList" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <div class="overlay hidden" id="modalOverlay">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">TASK</p>
+            <h2 id="modalTitle">Add New Task</h2>
+          </div>
+          <button class="icon-btn" id="closeModal" aria-label="Close dialog">
+            <i class="uil uil-times"></i>
+          </button>
+        </div>
+
+        <form id="taskForm">
+          <input type="hidden" id="taskId" />
+
+          <label>
+            Task Title
+            <input
+              id="title"
+              type="text"
+              maxlength="120"
+              required
+              placeholder="e.g. Finish landing page"
+            />
+          </label>
+
+          <label>
+            Description
+            <textarea
+              id="description"
+              rows="4"
+              placeholder="Add task details..."
+            ></textarea>
+          </label>
+
+          <div class="form-grid">
+            <label>
+              Priority
+              <select id="priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+
+            <label>
+              Status
+              <select id="status">
+                <option value="todo">To Do</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Due Date
+            <input id="dueDate" type="date" />
+          </label>
+
+          <div class="form-actions">
+            <button type="button" class="secondary-btn" id="cancelModal">
+              Cancel
+            </button>
+            <button type="submit" class="primary-btn">
+              <i class="uil uil-check"></i> Save Task
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
