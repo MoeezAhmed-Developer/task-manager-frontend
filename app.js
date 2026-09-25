@@ -1,4 +1,4 @@
-const API = "https://task-manager-backend-tau-lac.vercel.app/api";
+const API = "https://task-manager-backend-1d5u.vercel.app/api";
 
 const taskList = document.querySelector("#taskList");
 const modalOverlay = document.querySelector("#modalOverlay");
